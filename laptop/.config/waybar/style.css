@@ -1,0 +1,110 @@
+* {
+  font-family: "JetBrainsMono Nerd Font Propo";
+  font-weight: bold;
+  font-size: 14px;
+  min-height: 0;
+}
+
+@define-color base   #15161e;
+@define-color surface #292c3c;
+@define-color text   #c0caf5;
+@define-color accent #77b5a6;
+@define-color active #5A189A;
+@define-color hover  #721d7e;
+@define-color warning #ffcc00;
+@define-color critical #ff4c4c;
+
+window#waybar {
+  background: transparent;
+}
+
+tooltip {
+  font-family: inherit;
+  background: @base;
+  border: 2px solid @text;
+  border-radius: 5px;
+}
+
+#idle_inhibitor,
+#workspaces button,
+#tray,
+#custom-mpris_song_progress,
+
+#clock,
+
+#pulseaudio,
+#network,
+#memory,
+#cpu,
+#temperature,
+#battery,
+#custom-updates {
+  background: @surface; 
+  margin: 10px 5px 10px 5px;
+  padding: 4px 10px;
+  box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.185);
+  border-radius: 8px;
+  color: @accent
+}
+
+#clock {
+  padding-right: 5px;
+}
+
+#workspaces {
+  padding: 0 3px;
+}
+
+#workspaces button {
+  padding: 0px 12px 0px 8px;
+  margin-left: 3px;
+  border: 1px solid transparent;
+  transition-property: background-color, border-left-color, border-right-color;
+  transition-duration: 0.1s;
+  font-size: 10px;
+  color: @text;
+}
+
+#workspaces button.empty {
+  padding: 0px 10px;
+}
+
+#workspaces button:first-child {
+  margin-left: 0;
+}
+
+#workspaces button.focused, #workspaces button.active {
+  background: @active 
+}
+
+#workspaces button:hover {
+  background: @hover 
+}
+
+#power-profiles-daemon {
+  color: #c4cdf2;
+}
+
+#cpu.warning {
+  color: @warning
+}
+
+#cpu.critical {
+  color: @critical
+}
+
+#temperature.warning {
+  color: @warning
+}
+
+#temperature.critical {
+  color: @critical
+}
+
+#battery.discharging.warning {
+  color: @warning
+}
+
+#battery.discharging.critical {
+ color: @critical
+}

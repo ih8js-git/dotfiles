@@ -1,0 +1,143 @@
+// -*- mode: jsonc -*-
+{
+    "spacing": 4, // Gaps between modules (4px)
+    "modules-left": [
+        "idle_inhibitor",
+        "sway/workspaces",
+        "tray",
+        // "mpris"
+        "custom/mpris_song_progress"
+    ],
+    "modules-center": [
+        "clock"
+    ],
+    "modules-right": [
+        "pulseaudio",
+        "network",
+        "memory",
+        "cpu",
+        "temperature",
+        "battery"
+    ],
+    // Left
+    "idle_inhibitor": {
+        "format": "{icon}",
+        "format-icons": {
+            "activated": "",
+            "deactivated": ""
+        }
+    },
+    "sway/workspaces": {
+        "format": "<span size='small' font='normal Font Awesome 6 Free'>{icon}</span>",
+        "on-click": "activate",
+        "sort-by-number": true,
+        "on-scroll-up": "hyprctl dispatch workspace e-1",
+        "on-scroll-down": "hyprctl dispatch workspace e+1"
+    },
+    "tray": {
+        "spacing": 10,
+        "icons": {
+          "blueman": "bluetooth",
+          "TelegramDesktop": "$HOME/.local/share/icons/hicolor/16x16/apps/telegram.png"
+        }
+    },
+
+    // Center
+    "clock": {
+        "interval": 1,
+        "format": " {:%a %d/%m %b | %H:%M}  ",
+	"tooltip-format": "<big>{:%Y %B}\n<tt>{calendar}</tt></big>",
+	"calendar": {
+            "mode": "month",
+	    "format": {
+            	"months": "<span color='#e0e0e0'><b>{}</b></span>",
+            	"days": "<span color='#b0b0b0'>{}</span>",
+	    	"weekdays": "<span color='#C77DFF'><b>{}</b></span>",
+            	"today": "<span background='#5A189A' color='#ffffff'><b> {} </b></span>"
+	    }
+	}
+    },
+
+    // Right
+    "pulseaudio": {
+        "format": "{icon} {volume}% {format_source}",
+        "format-bluetooth": "{icon} {volume}% {format_source}",
+        "format-bluetooth-muted": "<big>󰝟</big> {icon} {format_source}",
+        "format-muted": "<big>󰝟</big> {format_source}",
+        "format-source": " {volume}%",
+        "format-source-muted": "",
+        "format-icons": {
+            "headphone": "",
+            "default": ["", "", ""]
+        },
+        "on-click": "pavucontrol"
+    },
+    "network": {
+        "format-wifi": " {essid} ({signalStrength}%)",
+        "format-ethernet": "󰈀 {ipaddr}/{cidr}",
+        "tooltip-format": "{gwaddr}/{ipaddr} [{ifname}]",
+        "format-linked": "{ifname} (No IP) 󰖪",
+        "format-disconnected": "Disconnected ⚠",
+	"format-alt": "{gwaddr}/{ipaddr} [{ifname}]"
+    },
+    "memory": {
+        "interval": 30,
+        "format": " {used:0.1f} GB"
+    },
+    "cpu": {
+        "format": " {usage}%",
+        "tooltip": false,
+        "interval": 1,
+        "states": {
+            "warning": 50,
+            "critical": 80
+        }
+    },
+    "temperature": {
+        "hwmon-path": "/sys/class/hwmon/hwmon4/temp1_input",
+        "critical-threshold": 80,
+        "format": "{temperatureC}°C {icon}",
+        "format-icons": ["", "", ""]
+    },
+    "battery": {
+        "states": {
+            "warning": 40,
+            "critical": 20
+        },
+        "format": "{time} {icon}",
+        "format-full": "{capacity}% {icon}",
+        "format-charging": "{capacity}% ",
+        "format-plugged": "{capacity}% ",
+        "format-alt": "{capacity}% {icon}",
+        "format-icons": ["", "", "", "", ""]
+    },
+
+    "mpris": {
+      "format": "{player_icon} {status_icon} {artist} - {title}",
+      "format-paused": "{player_icon} {status_icon} {artist} - {title}",
+      "format-stopped": "{player_icon}",
+      "player-icons": {
+        "default": "",
+        "spotify": "",
+        "discord": ""
+      },
+      "status-icons": {
+        "paused": ""
+      },
+      // Optionally, ignore certain players
+      // "ignored-players": ["io", "chromium", "firefox"]
+    },
+    "custom/mpris_song_progress": {
+      "format": "{}",
+      "return-type": "json",
+      // "exec": "waybar-mpris --autofocus --position --order \"SYMBOL:ARTIST:TITLE:POSITION\"",
+      "exec": "waybar-mpris --autofocus --position --order \"SYMBOL:TITLE:POSITION\"",
+      "on-click": "waybar-mpris --send toggle",
+      "on-click-right": "waybar-mpris --send player-next",
+      "player-icons": {
+        "default": "",
+        "spotify": "",
+        "discord": ""
+      }
+    },
+}
