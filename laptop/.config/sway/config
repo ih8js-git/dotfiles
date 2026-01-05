@@ -10,7 +10,8 @@
 font pango:Inter SemiBold 11
 
 exec waybar
-exec albert
+exec systemctl --user start elephant
+exec walker --qapplication-service
 
 set $mod Mod4
 # Home row direction keys, like vim
@@ -20,7 +21,7 @@ set $up k
 set $right l
 
 set $term kitty
-set $menu albert toggle
+set $menu walker
 
 ### Output configuration
 #
@@ -49,7 +50,8 @@ exec swayidle -w \
     timeout 3600 'systemctl suspend-then-hibernate' \
     before-sleep 'hyprlock'
 
-output * mode 1920x1080@60hz
+output * mode 2256x1504@60hz
+output * scale 1.3
 output * adaptive_sync off
 
 ### Input configuration
