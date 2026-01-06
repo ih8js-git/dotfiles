@@ -1,0 +1,86 @@
+[user]
+	name = 404-5971
+	email = 141177946+404-5971@users.noreply.github.com
+    signingkey = 340A6B92F56FD0FA
+
+[commit]
+    gpgSign = true
+
+[core]
+    compression = 9
+    whitespace = error
+    preloadindex = true
+
+[url "https://github.com/404-5971/"]
+    insteadof = "me:"
+
+[url "https://github.com/"]
+    insteadof = "gh:"
+
+[init]
+    defualtBranch = main
+
+[log]
+    abbrevCommit = true  # short commits
+    graphColors = blue,yellow,cyan,magenta,green,red
+
+[status]
+    branch = true
+    showStash = true
+    showUntrackedFiles = all
+
+; [diff]
+;     context = 3
+;     renames = copies
+;     interHunkContext = 10
+
+; [pager]
+;     diff = diff-so-fancy | $PAGER
+
+[push]
+    autoSetupRemote = true  # easier to push new branches
+    default = current  # push only current branch by default
+    followTags = true  # push also tags
+    gpgSign = false  # my remotes doesn't support sign pushes
+
+[pull]
+    default = current
+
+; [diff-so-fancy]
+;     markEmptyLines = false
+
+[branch]
+    sort = -committerdate
+
+[tag]
+    sort = -taggerdate
+
+[interactive]
+    diffFilter = diff-so-fancy --patch
+    singlekey = true
+
+[color "diff"]
+    meta       = black bold
+    frag       = magenta
+    context    = white
+    whitespace = yellow reverse
+
+[color "decorate"]
+    HEAD = red
+    branch = blue
+    tag = yellow
+    remoteBranch = magenta
+
+; [color "branch"]
+;     current  = magenta
+;     local    = default
+;     remote   = yellow
+;     upstream = green
+;     plain    = blue
+
+[interactive]
+    diffFilter = diff-so-fancy --patch
+    singlekey = true
+
+[credential "https://github.com"]
+	helper = !/usr/bin/gh auth git-credential
