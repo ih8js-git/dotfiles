@@ -9,9 +9,8 @@
 # Logo key. Use Mod1 for Alt.
 font pango:Inter SemiBold 11
 
-exec waybar
-exec systemctl --user start elephant
-exec walker --gapplication-service
+exec waybar && pkill -SIGUSR1 waybar
+exec bash -c "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP PATH && systemctl --user restart elephant && walker --gapplication-service"  
 
 set $mod Mod4
 # Home row direction keys, like vim
@@ -45,10 +44,10 @@ set $menu nc -U /run/user/1000/walker/walker.sock
 #
 ### Idle configuration
 exec swayidle -w \
-    timeout 60 'hyprlock' \
+    timeout 60 'swaylock' \
     timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
     timeout 3600 'systemctl suspend-then-hibernate' \
-    before-sleep 'hyprlock'
+    before-sleep 'swaylock'
 
 output * mode 2256x1504@60hz
 output * scale 1.3
@@ -82,6 +81,7 @@ output * adaptive_sync off
     # Kill focused window
     # bindsym $mod+Shift+q kill
     bindsym $mod+c kill
+    bindsym $mod+b exec pkill -SIGUSR1 waybar
 
     # Start your launcher
     bindsym ctrl+space exec $menu
@@ -162,7 +162,7 @@ output * adaptive_sync off
     # You can "split" the current object of your focus with
     # $mod+b or $mod+v, for horizontal and vertical splits
     # respectively.
-    bindsym $mod+b splith
+    # bindsym $mod+b splith
     bindsym $mod+v splitv
 
     # Switch the current container between different layout styles
